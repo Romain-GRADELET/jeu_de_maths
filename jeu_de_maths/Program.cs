@@ -14,6 +14,7 @@ namespace jeu_de_maths
         static bool PoserQuestion(int min, int max)
         {
             int reponseInt = 0;
+
             while (true)
             {
                 Random rand = new Random();
@@ -23,31 +24,30 @@ namespace jeu_de_maths
 
                 // Sélection de l'opérateur
                 e_operator o = (e_operator)rand.Next(1, 4);
-                // o => 1 ou 2 
+                // o => 
                 //      1 => Addition
                 //      2 => Multiplication
+                //      3 => ...
 
                 int expectedResult;
 
-                if (o == e_operator.ADDITION)
+                switch (o)
                 {
-                    expectedResult = a + b;
-                    Console.Write($"{a} + {b} = ");
-                }
-                else if (o == e_operator.MULTIPLICATION)
-                {
-                    expectedResult = a * b;
-                    Console.Write($"{a} x {b} = ");
-                }
-                else if (o == e_operator.SOUSTRACTION)
-                {
-                    expectedResult = a - b;
-                    Console.Write($"{a} - {b} = ");
-                }
-                else
-                {
-                    Console.WriteLine("ERREUR: Opérateur inconnu");
-                    return false;
+                    case e_operator.ADDITION:
+                        expectedResult = a + b;
+                        Console.Write($"{a} + {b} = ");
+                        break;
+                    case e_operator.MULTIPLICATION:
+                        expectedResult = a * b;
+                        Console.Write($"{a} x {b} = ");
+                        break;
+                    case e_operator.SOUSTRACTION:
+                        expectedResult = a - b;
+                        Console.Write($"{a} - {b} = ");
+                        break;
+                    default:
+                        Console.WriteLine("ERREUR: Opérateur inconnu");
+                        return false;
                 }
 
                 string reponse = Console.ReadLine();
