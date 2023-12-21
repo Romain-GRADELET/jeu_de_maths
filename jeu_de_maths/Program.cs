@@ -4,7 +4,7 @@ namespace jeu_de_maths
 {
     class Program
     {
-        static bool PoserQuestion(int min, int max, int nombreQuestion, int numQuestion)
+        static bool PoserQuestion(int min, int max)
         {
             int reponseInt = 0;
             while (true)
@@ -16,8 +16,6 @@ namespace jeu_de_maths
 
                 int result = a + b;
 
-                Console.WriteLine();
-                Console.WriteLine("Question numéro " + numQuestion + "/" + nombreQuestion);
                 Console.Write($"{a} + {b} = ");
                 string reponse = Console.ReadLine();
                 try
@@ -45,18 +43,24 @@ namespace jeu_de_maths
             const int NOMBRE_MAX = 10;
             const int NB_QUESTIONS = 3;
 
+            int score = 0;
+
             for (int i = 1; i <= NB_QUESTIONS; i++) 
             {
-                bool bonneReponse = PoserQuestion(NOMBRE_MIN, NOMBRE_MAX, NB_QUESTIONS, i);
+                Console.WriteLine("Question " + i + "/" + NB_QUESTIONS);
+                bool bonneReponse = PoserQuestion(NOMBRE_MIN, NOMBRE_MAX);
                 if (bonneReponse)
                 {
                     Console.WriteLine("Bonne réponse !");
+                    score++;
                 }
                 else
                 {
-                    Console.WriteLine("Mauvaise réponse !");
+                    Console.WriteLine("Mauvaise réponse !");                  
                 }
+                Console.WriteLine();
             }
+            Console.WriteLine("Vous avez un score de " + score + "/" + NB_QUESTIONS);
         }
     }
 }
