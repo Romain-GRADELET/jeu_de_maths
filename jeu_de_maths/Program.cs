@@ -4,6 +4,13 @@ namespace jeu_de_maths
 {
     class Program
     {
+        enum e_operator
+        {
+            ADDITION = 1 , 
+            MULTIPLICATION = 2,
+            SOUSTRACTION = 3
+        }
+
         static bool PoserQuestion(int min, int max)
         {
             int reponseInt = 0;
@@ -15,23 +22,33 @@ namespace jeu_de_maths
                 int b = rand.Next(min, max + 1);
 
                 // Sélection de l'opérateur
-                int o = rand.Next(1, 3);
+                e_operator o = (e_operator)rand.Next(1, 4);
                 // o => 1 ou 2 
                 //      1 => Addition
                 //      2 => Multiplication
 
                 int expectedResult;
 
-                if (o == 1)
+                if (o == e_operator.ADDITION)
                 {
                     expectedResult = a + b;
                     Console.Write($"{a} + {b} = ");
                 }
-                else
+                else if (o == e_operator.MULTIPLICATION)
                 {
                     expectedResult = a * b;
                     Console.Write($"{a} x {b} = ");
-                }           
+                }
+                else if (o == e_operator.SOUSTRACTION)
+                {
+                    expectedResult = a - b;
+                    Console.Write($"{a} - {b} = ");
+                }
+                else
+                {
+                    Console.WriteLine("ERREUR: Opérateur inconnu");
+                    return false;
+                }
 
                 string reponse = Console.ReadLine();
                 try
