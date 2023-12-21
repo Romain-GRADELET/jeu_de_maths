@@ -14,14 +14,30 @@ namespace jeu_de_maths
                 int a = rand.Next(min, max +1);
                 int b = rand.Next(min, max + 1);
 
-                int result = a + b;
+                // Sélection de l'opérateur
+                int o = rand.Next(1, 3);
+                // o => 1 ou 2 
+                //      1 => Addition
+                //      2 => Multiplication
 
-                Console.Write($"{a} + {b} = ");
+                int expectedResult;
+
+                if (o == 1)
+                {
+                    expectedResult = a + b;
+                    Console.Write($"{a} + {b} = ");
+                }
+                else
+                {
+                    expectedResult = a * b;
+                    Console.Write($"{a} x {b} = ");
+                }           
+
                 string reponse = Console.ReadLine();
                 try
                 {
                     reponseInt = int.Parse(reponse);
-                    if ( reponseInt == result )
+                    if ( reponseInt == expectedResult)
                     {
                         return true;                     
                     }
@@ -41,7 +57,7 @@ namespace jeu_de_maths
         {
             const int NOMBRE_MIN = 1;
             const int NOMBRE_MAX = 10;
-            const int NB_QUESTIONS = 3;
+            const int NB_QUESTIONS = 10;
 
             int score = 0;
 
@@ -61,6 +77,25 @@ namespace jeu_de_maths
                 Console.WriteLine();
             }
             Console.WriteLine("Vous avez un score de " + score + "/" + NB_QUESTIONS);
+
+            float moyenne = NB_QUESTIONS / 2f;
+
+            if (score == NB_QUESTIONS) 
+            {
+                Console.WriteLine("Excellent");
+            }
+            else if (score == 0) 
+            {
+                Console.WriteLine("Révisez vos maths");
+            }
+            else if (score >= moyenne)
+            {
+                Console.WriteLine("Pas mal");
+            }
+            else 
+            {
+                Console.WriteLine("Peut mieux faire");
+            }
         }
     }
 }
